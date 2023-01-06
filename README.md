@@ -1,34 +1,36 @@
 # Juneogo-docker
 Implementation of docker with the junego application.
 
-# Paramètrage du serveur
+# Setting up the server
 
-## Ajout d'un utilisateur
-adduser junego
+## Adding a user
 
+```
+adduser juneogo
+```
 
-## Génération de clés SSH
-Pour le premier serveur à setup il faut générer des clés : 
+## Generating SSH keys
+For the first server to be set up you need to generate keys: 
 
 ```ssh-keygen```
 
-## Autorisation de la clé
-Quand tu as déjà tes clés :
+## Adding the keys
+You already have an ssh key pair:
 
 ```sudo mkdir .ssh```
 
-⚠️ utiliser cette fonction uniquement si authorized_keys est vide ou n'existe pas
+⚠️ only use this function if authorized_keys is empty or does not exist
 
 ```cat .ssh/id_rsa.pub >> .ssh/authorized_keys```
 
-⚠️ pour rajouter ta clé si le fichier existe : 
-	- soit tu utilise nano
-	- soit avec un seul '>' : 
+⚠️ to add your key if the file exists: 
+	- either you use nano
+	- or with a single '>': 
   
 ```cat .ssh/id_rsa.pub > .ssh/authorized_keys```
 
 
-## Modification des permissions
+## Changing permissions
 
 ```
 chmod 700 .ssh
@@ -36,41 +38,41 @@ chmod 700 .ssh
 chmod 644 .ssh/authorized_keys
 ```
 
-## Désactivation de l'authentification par mot de passe et du login root
-Ensuite, pour désactiver le root login et l'authentification par mot de passe, il faut aller dans l'utilisateur root:
+## Disabling password authentication and root login
+To disable the root login and password authentication, go to the root user:
 
 ```
 su -
 ```
 
-Puis ouvrir le fichier de configuration de SSH:
+Then open the SSH configuration file:
 
 ```
 nano /etc/ssh/sshd_config
 ```
-Il faut ensuite modifier les lignes suivantes en passant de `yes` à `no`:
+Then change the following lines from `yes` to `no`:
 
 ```
 PermitRootLogin no
 PasswordAuthentication no
 ```
 
-Puis recharger le service SSH:
+Then reload the SSH service:
 
 ```
 sudo systemctl reload sshd
 ```
-⚠️ N'oublie pas de tester la connexion une fois ces modifications apportées! Si cela ne fonctionne pas, il ne faut absolument pas se déconnecter.
+⚠️ Don't forget to test the connection once you have made these changes! If it doesn't work, definitely don't disconnect.
 
-# Installation de Docker
+# Installing Docker
 
-Pour installer Docker sur Ubuntu 22.04, suis les instructions disponibles à cette adresse:
-
+To install Docker on Ubuntu 22.04, follow the instructions available at this address:
+```
 https://docs.docker.com/engine/install/ubuntu/
+```
+## Installing docker-compose
 
-## Installation de docker-compose
-
-Pour installer docker-compose, exécute les commandes suivantes:
+To install docker-compose, run the following commands:
 
 ```
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
@@ -78,73 +80,68 @@ sudo chmod +x /usr/local/bin/docker-compose
 sudo usermod -aG docker junego
 sudo chmod 666 /var/run/docker.sock
 ```
-
-
-Pour vérifier que docker-compose a été correctement installé, exécute la commande suivante:
+To verify that docker-compose has been installed correctly, run the following command:
 
 ```
 docker-compose -v
 ```
 
-# Lancer le noeud :
+# Configure the node:
 
-1) Copier les fichiers dans le serveur à l'emplacement /home/junego
-2) modifier le fichier obtain-ssl-certificates.sh en changeant l'email et le domain name
-```
-certbot certonly --standalone --agree-tos --preferred-challenges http-01 --email email@email.com -d mondomaine.com
-```
+1) Copy the files to the server at /home/junego (or clone this repo)
 
-3) modifier cette ligne du dockerCompose en mettant le bon nom de domaine 
+
+2) Change this line in the docker-compose to the correct email and domain name 
 
 ```
-command:  bash -c "./obtain-ssl-certificates.sh domain.com && ./juneogo --config-file='.juneogo/config.json'"
+command: bash -c "./obtain-ssl-certificates.sh domain.com email@email.fr && ./juneogo --config-file='.juneogo/config.json'"
 ```
 
-4) Lancer le noeud
+4) Run the node
 
 ```
 docker-compose build
 docker-compose up -d
 ```
 
-5) rentrer dans le container : 
+5) Enter into the container: 
 
 ```
 docker exec -ti juneogo /bin/bash
 ```
 
-une fois les fichiers créé il faut aller dans le root et faire : 
+Once the files are created, go to the root and do : 
 
 ```
 sudo chown -R junego .juneogo/
 ```
 
-# Installer Promeutheus : 
+# Install Promeutheus : 
 
-1) ajouter juneogo aux root : 
+1) Add juneogo to the root :  
 ```
 usermod -aG sudo junego
 ```
-2) suivre ce tuto :
+2) Follow this tutorial:
 ```
 https://docs.avax.network/nodes/maintain/setting-up-node-monitoring
 ```
-2.1) download le scrip dans un user root (pas le root de base ) 
+2.1) Download the script to a user root (not the base root) 
 ```
 wget -nd -m https://raw.githubusercontent.com/ava-labs/avalanche-monitoring/main/grafana/monitoring-installer.sh ;\
 chmod 755 monitoring-installer.sh;
 ```
-2.2) lancer ces 2 commandes ( après la 1 er il faut rentrer le mdp du user)
+2.2) Run these 2 commands (after the first one you have to enter the user's password)
 ```
 ./monitoring-installer.sh --1
 ./monitoring-installer.sh --3
 ```
 
-3) modif la config prometheus
+3) Modify the prometheus config
 ```
 nano etc/prometheus/prometheus.yml 
 ```
-changer les lignes pour que ça fonctionne avec le https (si https mis)
+Change lines to work with https (if https set)
 ```
  - job_name: 'avalanchego'
     metrics_path : '/ext/metrics'
@@ -152,11 +149,11 @@ changer les lignes pour que ça fonctionne avec le https (si https mis)
     static_configs:
        - targets: ['api1.mcnpoc4.xyz:9650']
 ```
-4) Restart le processus : 
+4) Restart the process: 
 ```
 sudo systemctl restart prometheus
 ```
-ensuite aller vérifier sur que tout soit up : 
+Then go and check that everything is up: 
 ```
 http://api1.mcnpoc4.xyz:9090/targets?search=
 ```
