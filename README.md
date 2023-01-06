@@ -121,7 +121,7 @@ sudo chown -R junego .juneogo/
 
 1) Add juneogo to the root :  
 ```
-usermod -aG sudo junego
+usermod -aG sudo juneogo
 ```
 2) Follow this tutorial:
 ```
@@ -157,4 +157,9 @@ sudo systemctl restart prometheus
 Then go and check that everything is up: 
 ```
 http://api1.mcnpoc4.xyz:9090/targets?search=
+```
+
+5) Remove juneogo from root 
+```
+sudo deluser juneogo sudo
 ```
