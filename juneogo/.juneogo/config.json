@@ -1,0 +1,12 @@
+{
+  "http-tls-key-file": "/etc/letsencrypt/live/api11.mcnpoc4.xyz/privkey.pem",
+  "http-tls-cert-file": "/etc/letsencrypt/live/api11.mcnpoc4.xyz/fullchain.pem",
+  "http-tls-enabled": "true",
+  "http-host":"192.168.10.2",
+  "chain-config-dir":".juneogo/configs/chains",
+  "db-dir":".juneogo/db",
+  "log-dir":".juneogo/logs",
+  "staking-tls-cert-file":".juneogo/staking/staker.crt",
+  "staking-tls-key-file":".juneogo/staking/staker.key"
+}
+
