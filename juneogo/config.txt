@@ -1,0 +1,2 @@
+  "staking-tls-cert-file":".juneogo/staking/staker.crt",
+  "staking-tls-key-file":".juneogo/staking/staker.key",
