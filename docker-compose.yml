@@ -18,8 +18,7 @@ services:
       slg-network:
         ipv4_address: 192.168.10.2
     
-    command: bash -c "./config.sh && ./obtain-ssl-certificates.sh archive1.mcnpoc4.xyz corentda@hotmail.fr && ./juneogo --config-file='.juneogo/config.json'"
-    # command : tail -f /dev/null
+    command: bash -c "./config.sh && ./obtain-ssl-certificates.sh domain.com email@mail.fr && ./juneogo --config-file='.juneogo/config.json'"
  
 networks:
 
