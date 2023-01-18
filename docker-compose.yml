@@ -10,7 +10,7 @@ services:
       - 80:80 # 80 for Certbot
       - 443:443 # 443 for Certbot
       - 9650:9650 # 9650 for api
-      - 9650:9650 # 9650 for staking
+      - 9651:9651 # 9651 for staking
     
     volumes:
       - ./juneogo:/root
