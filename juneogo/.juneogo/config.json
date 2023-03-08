@@ -7,5 +7,6 @@
   "http-tls-cert-file": "",
   "http-tls-enabled": "true",
   "chain-config-dir":".juneogo/configs/chains",
-  "http-host":"192.168.10.2"
+  "http-host":"192.168.10.2",
+  "public-ip":"143.42.27.9"
 }
