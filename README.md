@@ -94,7 +94,7 @@ docker-compose -v
 2) Change this line in the docker-compose to the correct email and domain name 
 
 ```
-command: bash -c "./obtain-ssl-certificates.sh domain.com email@email.fr && ./juneogo --config-file='.juneogo/config.json'"
+command: bash -c "./config.sh && ./obtain-ssl-certificates.sh domain.com email@mail.fr && ./juneogo --config-file='.juneogo/config.json'"
 ```
 If you do not specify an email or domain name, the node will work without https
 
