@@ -91,12 +91,12 @@ docker-compose -v
 1) Copy the files to the server at /home/junego (or clone this repo)
 
 
-2) Change this line in the docker-compose to the correct email and domain name 
+2) Change this line in the docker-compose to the correct email and domain name to be able to use https.
 
 ```
 command: bash -c "./config.sh && ./obtain-ssl-certificates.sh domain.com email@mail.fr && ./juneogo --config-file='.juneogo/config.json'"
 ```
-If you do not specify an email or domain name, the node will work without https
+To use http, simply remove `domain.com` and `email@email.fr`.
 
 4) Run the node
 
