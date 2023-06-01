@@ -1,4 +1,4 @@
-FROM golang:latest
+FROM ubuntu:latest
 
 # Install certbot
 RUN apt-get update && \
@@ -11,6 +11,8 @@ RUN apt-get update && apt-get install -y iputils-ping nano systemd-timesyncd
 COPY ./juneogo/ /root/
 WORKDIR /root/
 # Set the authorisation
+RUN ls
 RUN chmod +x obtain-ssl-certificates.sh
 RUN chmod +x juneogo
+RUN chmod +x ./juneogo
 RUN chmod -R +x plugins

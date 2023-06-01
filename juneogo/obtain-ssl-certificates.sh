@@ -21,7 +21,7 @@ else
     # If a domain name was specified, check if a certificate already exists
     if [ ! -f "/etc/letsencrypt/live/${domain_name}/cert.pem" ]; then
         # If no certificate exists, obtain a new one
-        certbot certonly --standalone --agree-tos --preferred-challenges http-01 --email ${email_address} -d ${domain_name}
+        certbot certonly --standalone --agree-tos --preferred-challenges http-01 --email ${email_address} -d ${domain_name} 
         if [ $? -eq 0 ]; then
         # If certificate generation succeeded, update the TLS options in the juneogo config file
         echo "Success create certificat"
@@ -29,7 +29,6 @@ else
         sed -i "s~http-tls-cert-file.*~http-tls-cert-file\": \"/etc/letsencrypt/live/${domain_name}/fullchain.pem\",~" .juneogo/config.json
         sed -i "s~http-tls-key-file.*~http-tls-key-file\": \"/etc/letsencrypt/live/${domain_name}/privkey.pem\",~" .juneogo/config.json
         else
-        
         # If certificate generation failed, remove the TLS options from the juneogo config file
         echo "Error when creating certificat"
         sed -i '/http-tls-enabled/d' .juneogo/config.json

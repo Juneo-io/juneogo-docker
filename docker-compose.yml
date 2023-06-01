@@ -15,6 +15,7 @@ services:
     volumes:
       - ./juneogo:/root
       - /etc/letsencrypt:/etc/letsencrypt
+      - /etc/localtime:/etc/localtime:ro
     networks:
       slg-network:
         ipv4_address: 192.168.10.2
