@@ -39,6 +39,3 @@ sudo systemctl start fail2ban
 sudo systemctl enable fail2ban
 
 EOROOT
-
-
-# need to add : timedate ctl

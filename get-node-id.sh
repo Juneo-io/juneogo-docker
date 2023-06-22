@@ -24,9 +24,4 @@ else
     }' -H 'content-type:application/json;' http://192.168.10.2:9650/ext/info
 fi
 
-#  curl -X POST --data '{
-#         "jsonrpc":"2.0",
-#         "id"     :1,
-#         "method" :"info.getNodeID"
-#     }' -H 'content-type:application/json;' http://127.0.0.1:9650/ext/info
 
