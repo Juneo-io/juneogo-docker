@@ -457,4 +457,4 @@ echo "sudo systemctl status juneogo"
 echo "To follow the log use (ctrl-c to stop):"
 echo "sudo journalctl -u juneogo -f"
 echo
-echo "Reach us over on https://chat.avax.network if you're having problems."
+echo "Reach us over on info@juneo.io if you're having problems."
