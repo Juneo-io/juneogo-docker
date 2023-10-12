@@ -1,36 +1,51 @@
 version: '2'
 
 services:
+  
   juneogo:
     build: .
     container_name: juneogo
     restart: unless-stopped
     ports:
-      - 80:80 # 80 for Certbot
-      - 443:443 # 443 for Certbot
       - 9650:9650 # 9650 for api
       - 9651:9651 # 9651 for staking
-
+    
     volumes:
       - ./juneogo:/root
       - /etc/letsencrypt:/etc/letsencrypt
       - /etc/localtime:/etc/localtime:ro
     networks:
       slg-network:
-        ipv4_address: 192.168.10.2
-
-    command: bash -c "./config.sh && ./obtain-ssl-certificates.sh domain.com email@mail.fr && ./juneogo --config-file='.juneogo/config.json'"
+          ipv4_address: 192.168.10.2
+    
+    command: bash -c "./config.sh && ./juneogo --config-file='.juneogo/config.json'"
     # put a max-size of 10m and max-file of 3 to avoid filling up the disk
     logging:
-      driver: 'json-file'
+      driver: "json-file"
       options:
-        max-size: '10m'
-        max-file: '3'
+        max-size: "10m"
+        max-file: "3"
+
+  caddy:
+    image: caddy:2.4.6
+    container_name: caddy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+      - ./caddy/caddy_data:/data
+      - ./caddy/caddy_config:/config
+      - ./juneogo/.juneogo:/etc/juneogo-ssl:ro
+    networks:
+      - slg-network
 
 networks:
-  slg-network:
-    driver: bridge
-    ipam:
-      config:
-        - subnet: 192.168.10.0/24
-          gateway: 192.168.10.1
+
+    slg-network:
+      driver: bridge
+      ipam:
+        config:
+          - subnet: 192.168.10.0/24
+            gateway: 192.168.10.1
+            
