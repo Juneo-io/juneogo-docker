@@ -1,3 +1,3 @@
-your_domain.com {
+your-domain.com {
     reverse_proxy juneogo:9650
 }
