@@ -1,12 +1,6 @@
 {
   "db-dir":".juneogo/db",
   "log-dir":".juneogo/logs",
-  "staking-tls-cert-file":".juneogo/staking/staker.crt",
-  "staking-tls-key-file":".juneogo/staking/staker.key",
-  "http-tls-key-file": "",
-  "http-tls-cert-file": "",
-  "http-tls-enabled": "true",
   "chain-config-dir":".juneogo/configs/chains",
-  "http-host":"192.168.10.2",
-  "public-ip":"143.42.27.9"
+  "http-host":"192.168.10.2"
 }

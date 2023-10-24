@@ -14,7 +14,6 @@ fi
 if [ ! -d "./.juneogo/chainData" ]; then
   mkdir -p ./.juneogo/chainData
 fi
-
 # Check if the file .juneogo/staking/staker.crt exists
 if [ -f ".juneogo/staking/staker.crt" ]; then
   # Check if the lines "staking-tls-cert-file" and "staking-tls-key-file" exist in the file .juneogo/config.json
