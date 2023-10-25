@@ -91,18 +91,25 @@ docker-compose -v
 1) Copy the files to the server at /home/junego (or clone this repo)
 
 
-2) Change this line in the docker-compose to the correct email and domain name to be able to use https.
+2) Change the first line in the caddy/Caddyfile to the correct domain name to be able to use HTTPS.
 
 ```
-command: bash -c "./config.sh && ./obtain-ssl-certificates.sh domain.com email@mail.fr && ./juneogo --config-file='.juneogo/config.json'"
+your-domain.com {
+    reverse_proxy juneogo:9650
+}
 ```
-To use http, simply remove `domain.com` and `email@email.fr`.
 
-4) Run the node
+4) Run the node with HTTPS
 
 ```
 docker-compose build
 docker-compose up -d
+```
+4.1) Run the node with HTTP
+
+```
+docker-compose build
+docker-compose up -d juneogo
 ```
 
 5) Enter into the container: 
