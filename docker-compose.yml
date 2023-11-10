@@ -6,7 +6,7 @@ services:
     container_name: juneogo
     restart: unless-stopped
     ports:
-      - 9650:9650 # 9650 for api
+      - 9650:9650 # 9650 for api - comment out this line to disable RPC calls to your node (not recommended for Supernet/Chain deployers)
       - 9651:9651 # 9651 for staking
 
     volumes:
