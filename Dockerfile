@@ -1,9 +1,5 @@
 FROM ubuntu:latest
 
-# Install certbot
-RUN apt-get update && \
-    apt-get install -y certbot
-
 # Install ping and nano
 RUN apt-get update && apt-get install -y iputils-ping nano systemd-timesyncd 
 
