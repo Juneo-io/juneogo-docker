@@ -34,7 +34,7 @@ docker-compose build
 docker-compose up -d juneogo
 ```
 
-This will start bootstrapping your node, and will have remote RPC calls enabled via your machine’s public IP address.
+This will start bootstrapping your node.
 
 ## 3.2) Run JuneoGo with HTTPS
 
