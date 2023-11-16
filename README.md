@@ -72,7 +72,7 @@ curl -X POST --data '{
     "params": {
         "chain":"JUNE"
     }
-}' -H 'content-type:application/json;' 127.0.0.1:9650/ext/info
+}' -H 'content-type:application/json;' 192.168.10.2:9650/ext/info
 ```
 
 Example response:
