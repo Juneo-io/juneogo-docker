@@ -34,3 +34,14 @@ else
   sed -i '/^\s*"staking-tls-cert-file"/d' .juneogo/config.json
   sed -i '/^\s*"staking-tls-key-file"/d' .juneogo/config.json
 fi
+
+# Add public IP into the config file
+
+# Path to your JSON file
+config_json=".juneogo/config.json"
+
+# Fetch the new public IP address using ipinfo.io
+public_ip=$(curl -s http://ipinfo.io | jq -r '.ip')
+
+# Update or add the public IP in the existing JSON file
+jq --arg ip "$public_ip" 'if has("public-ip") then .["public-ip"]=$ip else . + {"public-ip":$ip} end' "$config_json" > temp.json && mv temp.json "$config_json"
