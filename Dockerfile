@@ -1,7 +1,7 @@
 FROM ubuntu:latest
 
 # Install ping and nano
-RUN apt-get update && apt-get install -y iputils-ping nano systemd-timesyncd jq
+RUN apt-get update && apt-get install -y iputils-ping nano systemd-timesyncd jq curl
 
 # Copy the current directory contents into the container at /root
 COPY ./juneogo/ /root/
