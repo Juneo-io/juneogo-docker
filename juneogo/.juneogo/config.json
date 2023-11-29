@@ -2,5 +2,6 @@
   "db-dir":".juneogo/db",
   "log-dir":".juneogo/logs",
   "chain-config-dir":".juneogo/configs/chains",
-  "http-host":"192.168.10.2"
+  "http-host":"192.168.10.2",
+  "http-allowed-hosts":"*"
 }
