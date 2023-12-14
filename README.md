@@ -50,7 +50,7 @@ juneo.node.com {
 }
 ```
 
-After this, please execute:
+After this, please open the juneogo-docker directory in your command line and execute:
 
 ```bash
 docker-compose build
@@ -96,7 +96,7 @@ Example (if the user is `juneogo`):
 sudo chown -R juneogo .juneogo/
 ```
 
-To enter the juneogo Docker container, please execute:
+If necessary, you can enter the juneogo Docker container with the following command:
 ```bash
 docker exec -ti juneogo /bin/bash
 ```
