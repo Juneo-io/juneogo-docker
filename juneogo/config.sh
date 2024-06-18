@@ -14,6 +14,15 @@ fi
 if [ ! -d "./.juneogo/chainData" ]; then
   mkdir -p ./.juneogo/chainData
 fi
+
+# Check if .juneogo/config.json exists, if not create the file with the default configuration
+if [ ! -f ".juneogo/config.json" ]; then
+  # Create the file .juneogo/config.json
+  touch .juneogo/config.json
+  # Copy .juneogo/config.exemple.json to .juneogo/config.json
+  cp .juneogo/config.exemple.json .juneogo/config.json
+fi
+
 # Check if the file .juneogo/staking/staker.crt exists
 if [ -f ".juneogo/staking/staker.crt" ]; then
   # Check if the lines "staking-tls-cert-file" and "staking-tls-key-file" exist in the file .juneogo/config.json
