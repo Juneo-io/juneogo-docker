@@ -3,5 +3,6 @@ juneogo/.juneogo/db
 juneogo/.juneogo/staking
 juneogo/.juneogo/configs
 juneogo/.juneogo/chainData
+juneogo/.juneogo/config.json
 caddy/caddy_config
 caddy/caddy_data
