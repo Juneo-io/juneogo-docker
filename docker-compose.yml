@@ -34,7 +34,6 @@ services:
       - ./caddy/caddy_data:/data
       - ./caddy/caddy_config:/config
       - ./juneogo/.juneogo:/etc/juneogo-ssl:ro
-      - ./caddy/scripts:/scripts
     env_file:
       - .env
     networks:
