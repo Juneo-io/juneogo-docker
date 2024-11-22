@@ -40,7 +40,6 @@ services:
     networks:
       slg-network:
         ipv4_address: 192.168.10.3
-    entrypoint: ['/bin/sh', '/scripts/start.sh']
 
 networks:
   slg-network:
