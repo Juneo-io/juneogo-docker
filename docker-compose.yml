@@ -39,7 +39,7 @@ services:
       - .env
     networks:
       slg-network:
-        ipv4_address: 192.168.10.3
+        ipv4_address: 192.168.10.200
 
 networks:
   slg-network:

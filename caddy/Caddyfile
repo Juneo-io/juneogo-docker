@@ -5,7 +5,7 @@
 your-domain.com {
     reverse_proxy juneogo:9650
 
-    //  uncomment the following lines to enable basic auth
+    // Uncomment the following lines to enable basic auth for juneogo api
     // basic_auth  {
     //     {$CADDY_USER} {$CADDY_PASSWORD}
     // }
