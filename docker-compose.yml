@@ -24,7 +24,7 @@ services:
         max-file: '3'
 
   caddy:
-    image: caddy:latest
+    image: caddy:2.8.4
     container_name: caddy
     ports:
       - '80:80'
