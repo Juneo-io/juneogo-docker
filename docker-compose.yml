@@ -34,9 +34,13 @@ services:
       - ./caddy/caddy_data:/data
       - ./caddy/caddy_config:/config
       - ./juneogo/.juneogo:/etc/juneogo-ssl:ro
+      - ./caddy/scripts:/scripts
+    env_file:
+      - .env
     networks:
       slg-network:
         ipv4_address: 192.168.10.3
+    entrypoint: ['/bin/sh', '/scripts/start.sh']
 
 networks:
   slg-network:
