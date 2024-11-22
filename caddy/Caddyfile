@@ -1,3 +1,7 @@
+{
+  email your@email.com
+}
+
 your-domain.com {
     reverse_proxy juneogo:9650
 
