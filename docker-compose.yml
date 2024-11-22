@@ -1,5 +1,3 @@
-version: '2'
-
 services:
   juneogo:
     build: .
@@ -26,7 +24,7 @@ services:
         max-file: '3'
 
   caddy:
-    image: caddy:2.4.6
+    image: caddy:latest
     container_name: caddy
     ports:
       - '80:80'
