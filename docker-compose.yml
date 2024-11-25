@@ -23,8 +23,16 @@ services:
         max-size: '10m'
         max-file: '3'
 
+  # Prometheus Node Exporter
+  node_exporter:
+    image: prom/node-exporter
+    container_name: node_exporter
+    networks:
+      slg-network:
+        ipv4_address: 192.168.10.200
+
   caddy:
-    image: caddy:latest
+    image: caddy:2.8.4
     container_name: caddy
     ports:
       - '80:80'
@@ -38,7 +46,7 @@ services:
       - .env
     networks:
       slg-network:
-        ipv4_address: 192.168.10.200
+        ipv4_address: 192.168.10.201
 
 networks:
   slg-network:

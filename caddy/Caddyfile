@@ -3,11 +3,26 @@
 }
 
 your-domain.com {
-    reverse_proxy juneogo:9650
 
-    // Uncomment the following lines to enable basic auth for juneogo api
-    // basic_auth  {
-    //     {$CADDY_USER} {$CADDY_PASSWORD}
-    // }
+    // Uncomment the following line to disable authentication
+    // reverse_proxy juneogo:9650
+   
+    handle /ext/metrics* {
+        reverse_proxy juneogo:9650
+        basic_auth {
+            {$CADDY_USER} {$CADDY_PASSWORD}
+        }
+    }
+
+    handle /metrics* {
+        reverse_proxy node_exporter:9100
+        basic_auth {
+            {$CADDY_USER} {$CADDY_PASSWORD}
+        }
+    }
+
+    handle {
+        respond "Access Denied" 403
+    }
 }
 
