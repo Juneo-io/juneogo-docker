@@ -23,6 +23,14 @@ services:
         max-size: '10m'
         max-file: '3'
 
+  # Prometheus Node Exporter
+  node_exporter:
+    image: prom/node-exporter
+    container_name: node_exporter
+    networks:
+      slg-network:
+        ipv4_address: 192.168.10.200
+
   caddy:
     image: caddy:2.8.4
     container_name: caddy
@@ -34,9 +42,11 @@ services:
       - ./caddy/caddy_data:/data
       - ./caddy/caddy_config:/config
       - ./juneogo/.juneogo:/etc/juneogo-ssl:ro
+    env_file:
+      - .env
     networks:
       slg-network:
-        ipv4_address: 192.168.10.3
+        ipv4_address: 192.168.10.201
 
 networks:
   slg-network:
