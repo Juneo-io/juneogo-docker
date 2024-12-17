@@ -1,12 +1,9 @@
 {
-  email your@email.com
+  email {$CADDY_EMAIL}
 }
 
-your-domain.com {
-
-    // Uncomment the following line to disable authentication
-    // reverse_proxy juneogo:9650
-   
+{$CADDY_DOMAIN} {
+    
     handle /ext/metrics* {
         reverse_proxy juneogo:9650
         basic_auth {
