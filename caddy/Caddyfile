@@ -1,3 +1,25 @@
-your-domain.com {
-    reverse_proxy juneogo:9650
+{
+  email {$CADDY_EMAIL}
 }
+
+{$CADDY_DOMAIN} {
+    
+    handle /ext/metrics* {
+        reverse_proxy juneogo:9650
+        basic_auth {
+            {$CADDY_USER} {$CADDY_PASSWORD}
+        }
+    }
+
+    handle /metrics* {
+        reverse_proxy node_exporter:9100
+        basic_auth {
+            {$CADDY_USER} {$CADDY_PASSWORD}
+        }
+    }
+
+    handle {
+        respond "Access Denied" 403
+    }
+}
+
