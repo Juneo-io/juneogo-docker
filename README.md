@@ -26,6 +26,7 @@ ports:
 You may run JuneoGo using http or https.
 
 ## 3.1) Run JuneoGo with HTTP
+
 To run your node with http, please open the juneogo-docker directory in your command line and execute:
 
 ```bash
@@ -40,13 +41,22 @@ This will start bootstrapping your node.
 
 To run your node with https, please set up your custom domain to point to your machine's public ip address.
 
+Before starting Caddy, ensure you have set up your `.env` file with the necessary Caddy environment variables:
+
+```plaintext
+CADDY_EMAIL=your-email@example.com
+CADDY_DOMAIN=your-domain.com
+CADDY_USER=your-username
+CADDY_PASSWORD=your-password
+```
+
 Next, please update the file Caddyfile located in `juneogo-docker/caddy` to contain your domain instead of the sample url.
 
 Example:
 
 ```yaml
 juneo.node.com {
-    reverse_proxy juneogo:9650
+reverse_proxy juneogo:9650
 }
 ```
 
@@ -59,6 +69,8 @@ docker-compose up -d
 ```
 
 This will start bootstrapping your node.
+
+To securely export metrics, Caddy is configured to handle metrics endpoints. Metrics are securely exposed behind Caddy. If you want to have an API node, you need to expose `juneogo:9650` without credentials in the Caddyfile.
 
 # 4. Boostrapping status
 
@@ -76,6 +88,7 @@ curl -X POST --data '{
 ```
 
 Example response:
+
 ```bash
 {
   "jsonrpc": "2.0",
@@ -87,16 +100,19 @@ Example response:
 ```
 
 Once your node has fully boostrapped, navigate to `juneogo-docker/juneogo/` and execute the command in the following format:
+
 ```
 sudo chown -R [your_user_name] .juneogo/
 ```
 
 Example (if the user is `juneogo`):
+
 ```bash
 sudo chown -R juneogo .juneogo/
 ```
 
 If necessary, you can enter the juneogo Docker container with the following command:
+
 ```bash
 docker exec -ti juneogo /bin/bash
 ```
